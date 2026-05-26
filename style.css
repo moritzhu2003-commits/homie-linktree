@@ -16,22 +16,14 @@ body {
   position: relative;
 }
 
-/* Lebhafter Hintergrund */
-body::before {
-  content: '';
+/* WebGL Smoke Canvas als fixer Hintergrund */
+#bg-canvas {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124, 58, 237, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(99, 102, 241, 0.14) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 60% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
-  animation: bgPulse 8s ease-in-out infinite alternate;
+  width: 100%;
+  height: 100%;
   z-index: 0;
-}
-
-@keyframes bgPulse {
-  0%   { opacity: 0.7; }
-  100% { opacity: 1; }
+  display: block;
 }
 
 .container {
