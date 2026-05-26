@@ -162,9 +162,11 @@ h1 {
 .discord   .icon { color: #5865f2; }
 .youtube   .icon { color: #ff4444; }
 .twitch    .icon { color: #9146ff; }
+.notion    .icon { color: #ffffff; }
 .email     .icon { color: #a855f7; }
 
 .link-btn:hover.discord   .icon { box-shadow: 0 0 12px rgba(88,101,242,0.5); }
 .link-btn:hover.youtube   .icon { box-shadow: 0 0 12px rgba(255,68,68,0.5); }
 .link-btn:hover.twitch    .icon { box-shadow: 0 0 12px rgba(145,70,255,0.5); }
+.link-btn:hover.notion    .icon { box-shadow: 0 0 12px rgba(255,255,255,0.3); }
 .link-btn:hover.email     .icon { box-shadow: 0 0 12px rgba(168,85,247,0.5); }
