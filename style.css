@@ -12,9 +12,31 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Lebhafter Hintergrund */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124, 58, 237, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(99, 102, 241, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 60% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes bgPulse {
+  0%   { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 480px;
   padding: 2rem 1.5rem;
@@ -34,73 +56,21 @@ body {
 }
 
 .avatar {
-  width: 88px;
-  height: 88px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 0 3px rgba(168,85,247,0.3), 0 0 40px rgba(168, 85, 247, 0.5);
+  animation: avatarGlow 3s ease-in-out infinite alternate;
 }
 
-h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.bio {
-  color: #888;
-  font-size: 0.9rem;
-}
-
-/* Links */
-.links {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.link-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 1rem 1.4rem;
-  border-radius: 14px;
-  background: #1a1a1a;
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  border: 1px solid #2a2a2a;
-  transition: background 0.2s, transform 0.15s, border-color 0.2s;
-}
-
-.link-btn:hover {
-  background: #222;
-  border-color: #7c3aed;
-  transform: translateY(-2px);
-}
-
-.link-btn:active {
-  transform: translateY(0);
-}
-
-.icon {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.icon svg {
-  width: 100%;
-  height: 100%;
+@keyframes avatarGlow {
+  0%   { box-shadow: 0 0 0 3px rgba(168,85,247,0.3), 0 0 30px rgba(168,85,247,0.4); }
+  100% { box-shadow: 0 0 0 3px rgba(168,85,247,0.5), 0 0 55px rgba(168,85,247,0.6); }
 }
 
 .avatar img {
@@ -109,7 +79,92 @@ h1 {
   object-fit: cover;
 }
 
-.discord .icon { color: #5865f2; }
-.youtube .icon { color: #ff0000; }
-.twitch .icon { color: #9146ff; }
-.email .icon { color: #a855f7; }
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Links */
+.links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(168,85,247,0.06));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.link-btn:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(168, 85, 247, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.2);
+}
+
+.link-btn:hover::before {
+  opacity: 1;
+}
+
+.link-btn:active {
+  transform: translateY(0);
+}
+
+/* Icon container mit Glow */
+.icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.07);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.link-btn:hover .icon {
+  background: rgba(255,255,255,0.12);
+}
+
+/* Icon farben */
+.link-btn:nth-child(1) .icon { color: #e0e0e0; }
+.discord   .icon { color: #5865f2; }
+.youtube   .icon { color: #ff4444; }
+.twitch    .icon { color: #9146ff; }
+.email     .icon { color: #a855f7; }
+
+.link-btn:hover.discord   .icon { box-shadow: 0 0 12px rgba(88,101,242,0.5); }
+.link-btn:hover.youtube   .icon { box-shadow: 0 0 12px rgba(255,68,68,0.5); }
+.link-btn:hover.twitch    .icon { box-shadow: 0 0 12px rgba(145,70,255,0.5); }
+.link-btn:hover.email     .icon { box-shadow: 0 0 12px rgba(168,85,247,0.5); }
